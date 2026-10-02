@@ -280,3 +280,78 @@ button {
 .hero-particles-canvas {
     pointer-events: none;
 }
+
+
+/* ==================================================
+   HARD HOMEPAGE-ONLY MOTION SCOPE
+   Floating decorative elements are allowed to render ONLY
+   inside the homepage/hero section (#home).
+================================================== */
+.hero-floating-ui,
+.hero-motion-layer,
+.hero-particles-canvas {
+    contain: paint;
+}
+
+/* If any motion element is ever moved/duplicated outside #home,
+   keep it completely invisible there. */
+body > *:not(main) .hero-floating-ui,
+body > *:not(main) .hero-motion-layer,
+body > *:not(main) .hero-particles-canvas,
+main > section:not(#home) .hero-floating-ui,
+main > section:not(#home) .hero-motion-layer,
+main > section:not(#home) .hero-particles-canvas,
+main > section:not(#home) .floating-chip,
+main > section:not(#home) .floating-code,
+main > section:not(#home) .floating-spark,
+main > section:not(#home) .hero-diamond,
+main > section:not(#home) .hero-line,
+main > section:not(#home) .hero-orb,
+main > section:not(#home) .hero-particle,
+main > section:not(#home) .hero-cross {
+    display: none !important;
+}
+
+/* Only #home may display the decorative motion elements. */
+#home .hero-floating-ui,
+#home .hero-motion-layer,
+#home .hero-particles-canvas {
+    display: block;
+}
+
+#home {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden !important;
+    contain: paint;
+}
+
+#home .hero-floating-ui,
+#home .hero-motion-layer,
+#home .hero-particles-canvas {
+    position: absolute;
+    inset: 0;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+#home .hero-floating-ui *,
+#home .hero-motion-layer *,
+#home .hero-particles-canvas * {
+    pointer-events: none;
+}
+
+@media (max-width: 700px) {
+    /* Keep the mobile hero motion visually contained and lighter. */
+    #home .hero-floating-ui,
+    #home .hero-motion-layer,
+    #home .hero-particles-canvas {
+        overflow: hidden;
+    }
+
+    #home .floating-chip {
+        transform-origin: center center;
+    }
+}

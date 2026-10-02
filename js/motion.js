@@ -405,15 +405,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 (function initEnhancedMotion() {
     const start = () => {
+        /* Defensive rule: decorative motion is homepage-only. */
+        document.querySelectorAll(".hero-floating-ui, .hero-motion-layer, .hero-particles-canvas").forEach((el) => {
+            if (!el.closest("#home")) el.remove();
+        });
+
+        document.querySelectorAll(".floating-chip, .floating-code, .floating-spark, .hero-diamond, .hero-line, .hero-orb, .hero-particle, .hero-cross").forEach((el) => {
+            if (!el.closest("#home")) el.remove();
+        });
+
         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         if (reduceMotion) return;
 
         /* -----------------------------------------
            tsParticles — subtle interactive field
         ----------------------------------------- */
-        if (window.particles && document.getElementById("tsparticles")) {
+        const particleHost = document.querySelector("#home #tsparticles");
+        if (window.particles && particleHost) {
             window.particles({
-                id: "tsparticles",
+                id: particleHost.id,
                 count: window.innerWidth < 700 ? 28 : 46,
                 color: ["#1B42CB", "#FF2F6C"],
                 links: true,
