@@ -220,16 +220,16 @@ button {
 .line-one { top: 39%; left: 4%; transform: rotate(-22deg); }
 .line-two { bottom: 18%; right: 3%; transform: rotate(24deg); }
 
-/* A soft cursor halo gives desktop visitors immediate feedback. */
+/* A soft cursor halo stays inside the homepage hero only. */
 .cursor-glow {
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 0;
     width: 22px;
     height: 22px;
     border-radius: 50%;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 2;
     background: radial-gradient(circle, rgba(27,66,203,.24), rgba(27,66,203,0) 68%);
     filter: blur(1px);
     transform: translate(-50%, -50%);
@@ -266,4 +266,17 @@ button {
     .cursor-glow,
     .hero-floating-ui,
     .hero-particles-canvas { display: none !important; }
+}
+
+
+/* Keep all homepage-only motion visually clipped to the hero. */
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-motion-layer,
+.hero-floating-ui,
+.hero-particles-canvas {
+    pointer-events: none;
 }

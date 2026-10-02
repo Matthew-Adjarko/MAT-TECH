@@ -1807,18 +1807,26 @@ img {
 }
 
 .mobile-menu {
+    display: none;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-
+    visibility: hidden;
     transition:
         max-height 300ms ease,
-        opacity 200ms ease;
+        opacity 200ms ease,
+        visibility 0s linear 300ms;
 }
 
 .mobile-menu.active {
+    display: block;
     max-height: 500px;
     opacity: 1;
+    visibility: visible;
+    transition:
+        max-height 300ms ease,
+        opacity 200ms ease,
+        visibility 0s linear 0s;
 }
 
 html,

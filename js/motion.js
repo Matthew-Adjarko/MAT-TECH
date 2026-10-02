@@ -485,31 +485,23 @@ document.addEventListener("DOMContentLoaded", () => {
             const hero = document.querySelector(".hero");
             const glow = document.createElement("div");
             glow.className = "cursor-glow";
-            document.body.appendChild(glow);
-
-            let mouseX = window.innerWidth / 2;
-            let mouseY = window.innerHeight / 2;
-
-            window.addEventListener("pointermove", (event) => {
-                mouseX = event.clientX;
-                mouseY = event.clientY;
-
-                gsap.to(glow, {
-                    x: mouseX,
-                    y: mouseY,
-                    autoAlpha: .9,
-                    duration: .35,
-                    ease: "power2.out",
-                    overwrite: true
-                });
-            }, { passive: true });
-
-            document.addEventListener("pointerleave", () => {
-                gsap.to(glow, { autoAlpha: 0, duration: .25 });
-            });
 
             if (hero) {
+                hero.appendChild(glow);
+
                 hero.addEventListener("pointermove", (event) => {
+                    const heroRect = hero.getBoundingClientRect();
+                    const glowX = event.clientX - heroRect.left;
+                    const glowY = event.clientY - heroRect.top;
+
+                    gsap.to(glow, {
+                        x: glowX,
+                        y: glowY,
+                        autoAlpha: .9,
+                        duration: .35,
+                        ease: "power2.out",
+                        overwrite: true
+                    });
                     const rect = hero.getBoundingClientRect();
                     const x = (event.clientX - rect.left) / rect.width - .5;
                     const y = (event.clientY - rect.top) / rect.height - .5;
@@ -534,6 +526,22 @@ document.addEventListener("DOMContentLoaded", () => {
                         duration: 1.1,
                         ease: "power3.out",
                         overwrite: "auto"
+                    });
+                });
+
+                hero.addEventListener("pointerleave", () => {
+                    gsap.to(glow, { autoAlpha: 0, duration: .25 });
+                    gsap.to(".hero-floating-ui .floating-chip", {
+                        x: 0,
+                        y: 0,
+                        duration: .6,
+                        ease: "power3.out"
+                    });
+                    gsap.to(".hero-motion-layer .hero-orb", {
+                        x: 0,
+                        y: 0,
+                        duration: .8,
+                        ease: "power3.out"
                     });
                 });
             }

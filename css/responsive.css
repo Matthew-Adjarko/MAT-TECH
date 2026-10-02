@@ -61,10 +61,12 @@
     }
 
     .mobile-menu {
+        display: none;
         padding: 0 24px;
     }
 
     .mobile-menu.active {
+        display: block;
         padding-top: 12px;
         padding-bottom: 12px;
     }
