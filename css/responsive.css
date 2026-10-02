@@ -380,25 +380,7 @@
 ================================================== */
 
 @media (max-width: 640px) {
-    .hero-orb-one {
-        width: 230px;
-        height: 230px;
-        right: -70px;
-    }
-
-    .hero-orb-two {
-        width: 190px;
-        height: 190px;
-        left: -70px;
-    }
-
-    .hero-particle {
-        opacity: .65;
-    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero-motion-layer {
-        display: none;
-    }
 }
